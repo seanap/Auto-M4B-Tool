@@ -1,6 +1,5 @@
 # M4B-Tool Automation
 ---
----
 
 ## Overview:
 A method to watch a directory for newly added audiobooks, which triggers a script that converts the contents of that new folder into an m4b, and saves it to mp3tag's default directory ready for post processing.
@@ -8,7 +7,7 @@ A method to watch a directory for newly added audiobooks, which triggers a scrip
 I use multiple OSes for this particular automation. As such, this particular method may be impractical to some, but there's nothing special about these steps that requires multiple computers, and everything could be done solely on windows. 
 > Please consider contributing a Windows Only method if you write a similar windows script.
 
-##### My computer architecture
+#### My computer architecture
  
 | Computer | OS | Noteable Installs |
 |--|--|--|
@@ -16,14 +15,14 @@ I use multiple OSes for this particular automation. As such, this particular met
 | Docker Server VM | Ubuntu 20.04 | M4b-tool docker and automation script |
 | HTPC | Windows | mp3tag, dropit |
 
-##### Important folders:
+#### Important folders:
 * `/original` - Folder where I keep my untagged/unmodified original copies
 * `/temp/mp3merge` - Folder where I copy recently added mp3 audiobook folders
 * `/temp/Untagged` - Folder where I copy m4b files from `/original`, also where I optput the m4b file created from `/mp3merge`. This is the folder I set mp3tag to open by default.
 * `/temp/delete` - Purely a temp folder, used as a lazy way to delete the mp3 audiobook folder copied to `/mp3merge` after conversion to m4b.
 * `/audiobooks` - Folder where I keep properly tagged and organized audiobooks. This is what Plex/Booksonic looks at.
 
-##### Automated workflow:
+#### Automated workflow:
 1. Newly aquired audiobooks are put in `/original`
 2. Auto Copy book to appropriate folder based on filetype
   * If book is already an m4b, then copy to `/untagged/Book1.m4b`
@@ -36,12 +35,11 @@ I use multiple OSes for this particular automation. As such, this particular met
 8. Use mp3tag action script to rename/relocate to `/audiobooks`
 
 ---
----
 ## Install
 First let's prepare the Linux machine (Docker Server VM) .  We will be installing the m4b-tool docker, configuring a docker run command, and creating the automation script.
-#### Linux (Docker Server VM):
+### Linux (Docker Server VM):
 
-##### Install m4b-tool via docker
+#### Install m4b-tool via docker
 Docker is by far the easiest way to install and use m4b-tool.  Other methods will not be covered in this guide.
 ```bash
 # clone m4b-tool repository
@@ -59,7 +57,7 @@ docker run -it --rm -u $(id -u):$(id -g) -v "$(pwd)":/mnt m4b-tool --version
 ```
 > For other methods of installing m4b-tool see https://github.com/sandreas/m4b-tool#installation
 ---
-##### Understanding the docker run command
+#### Understanding the docker run command
 The docker run command is the heart of this operation.  There are two sets of variable we need to define that correspond to the Docker portion and the m4b-tool portion of this command.  The docker portion requires us to set the paths (volumes) that we will be working with.  The m4b-tool portion will define how to encode and combine the mp3 files.
 
 **Example:**
@@ -137,12 +135,12 @@ This will run the script in a terminal window. To exit the script type `ctrl-c`.
 
 ---
 
-### Windows (HTPC) Install Portion
+## Windows (HTPC) Install Portion
 So far we have a script that watches a directory for new folders, converts the contents of that new folder into an m4b, and saves it to mp3tag's default directory ready for post processing.
 
 The Windows portion of this process uses a program called Dropit to monitor your `/original` folder for recent additions and will copy mp3 book
 
-#### Install Dropit
+### Install Dropit
 Dropit is a very configurable, lightweight, windows utility, that will help us monitor `/original` for changes and copy the files and folders to the right locations.
 * Download, Install, and Run [Dropit](http://www.dropitproject.com/#download)
 * In the System Tray: Right-Click `Dropit` > `Profiles` > `Customize`
@@ -164,12 +162,11 @@ Dropit is a very configurable, lightweight, windows utility, that will help us m
   * Click `Save` and `OK`  
 ![Options](https://i.imgur.com/VUOPcqo.png)
 ---
----
-#### Tagging
+### Tagging
 Return to [Guide](https://github.com/seanap/Plex-Audiobook-Guide/blob/master/README.md#configure-mp3tag) to configure Mp3tag. 
 
 ---
-#### Notes:
+### Notes:
 There are many ways to customize this workflow. I'd love to hear what you've come up with.
 
 Huge shout-out to `tylerdotdo` for sharing the original `auto-m4b-tool.sh` script!
