@@ -1,16 +1,16 @@
 # M4B-Tool Automation
 ### Table of Contents
-1. [Overview](#overview)
-  * [Computer Architecture](#computer-architecture)
-  * [Important folders](#important-folders)
-2. [Linux Install](https://github.com/seanap/Auto-M4B-Tool#linux-docker-server-vm)
-  1. [Install m4b-tool](https://github.com/seanap/Auto-M4B-Tool#install-m4b-tool-via-docker)
-  2. [Docker Run Command](https://github.com/seanap/Auto-M4B-Tool#understanding-the-docker-run-command)
-  3. [Create the auto-m4b-tool.sh script](https://github.com/seanap/Auto-M4B-Tool#create-the-auto-m4b-toolsh-script)
-  4. [Running the auto-m4b-tool.sh script](https://github.com/seanap/Auto-M4B-Tool#run-the-auto-m4b-toolsh-script)
-3. [Windows Install](https://github.com/seanap/Auto-M4B-Tool#windows-htpc-install)
-4. [Tagging](#tagging)
-5. [Notes](#notes)
+1. [Overview](#overview)  
+  * [Computer Architecture](#computer-architecture)  
+  * [Important folders](#important-folders)  
+2. [Linux Install](https://github.com/seanap/Auto-M4B-Tool#linux-docker-server-vm)  
+  1. [Install m4b-tool](https://github.com/seanap/Auto-M4B-Tool#install-m4b-tool-via-docker)  
+  2. [Docker Run Command](https://github.com/seanap/Auto-M4B-Tool#understanding-the-docker-run-command)  
+  3. [Create the auto-m4b-tool.sh script](https://github.com/seanap/Auto-M4B-Tool#create-the-auto-m4b-toolsh-script)  
+  4. [Running the auto-m4b-tool.sh script](https://github.com/seanap/Auto-M4B-Tool#run-the-auto-m4b-toolsh-script)  
+3. [Windows Install](https://github.com/seanap/Auto-M4B-Tool#windows-htpc-install)  
+4. [Tagging](#tagging)  
+5. [Notes](#notes)  
 ---
 
 ## Overview:
