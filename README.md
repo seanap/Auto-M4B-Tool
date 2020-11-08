@@ -147,6 +147,7 @@ Dropit is a very configurable, lightweight, windows utility, that will help us m
 <p float="left">
   <img src="https://i.imgur.com/H7MUIar.png" width="40%" />
 </p>
+
 * Create a new Profile  
 ![New Profile](https://i.imgur.com/mZwyfTS.png)
 * In the System Tray: Right-Click `Dropit` > `Associations` Create the two associations shown below with your specific folder  
