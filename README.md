@@ -18,7 +18,7 @@ I use multiple OSes for this particular automation. As such, this particular met
 #### Important folders:
 * `/original` - Folder where I keep my untagged/unmodified original copies
 * `/temp/mp3merge` - Folder where I copy recently added mp3 audiobook folders
-* `/temp/Untagged` - Folder where I copy m4b files from `/original`, also where I optput the m4b file created from `/mp3merge`. This is the folder I set mp3tag to open by default.
+* `/temp/untagged` - Folder where I copy m4b files from `/original`, also where I optput the m4b file created from `/mp3merge`. This is the folder I set mp3tag to open by default.
 * `/temp/delete` - Purely a temp folder, used as a lazy way to delete the mp3 audiobook folder copied to `/mp3merge` after conversion to m4b.
 * `/audiobooks` - Folder where I keep properly tagged and organized audiobooks. This is what Plex/Booksonic looks at.
 
@@ -27,7 +27,7 @@ I use multiple OSes for this particular automation. As such, this particular met
 2. Auto Copy book to appropriate folder based on filetype
   * If book is already an m4b, then copy to `/untagged/Book1.m4b`
   * If book is mp3, then copy to `/mp3merge/Book1/*.mp3`
-3. Every 5 min my m4b-tool-automator script checks `/mp3merge` for new folders, when found creates a single chapterized M4b
+3. Every 5 min the `auto-m4b-tool.sh` script checks `/mp3merge` for new folders, when found creates a single chapterized M4b
 4. This newly created m4b file is saved to `/untagged`
 5. `/mp3merge/Book1` folder is moved to `/delete` and the contents of `/delete` is deleted
 6. Open mp3tag, all books that need processing will be loaded
@@ -41,6 +41,7 @@ First let's prepare the Linux machine (Docker Server VM) .  We will be installin
 
 #### Install m4b-tool via docker
 Docker is by far the easiest way to install and use m4b-tool.  Other methods will not be covered in this guide.
+
 ```bash
 # clone m4b-tool repository
 git clone https://github.com/sandreas/m4b-tool.git
@@ -55,18 +56,21 @@ docker build . -t m4b-tool
 docker run -it --rm -u $(id -u):$(id -g) -v "$(pwd)":/mnt m4b-tool --version
 
 ```
+
 > For other methods of installing m4b-tool see https://github.com/sandreas/m4b-tool#installation
 ---
 #### Understanding the docker run command
 The docker run command is the heart of this operation.  There are two sets of variable we need to define that correspond to the Docker portion and the m4b-tool portion of this command.  The docker portion requires us to set the paths (volumes) that we will be working with.  The m4b-tool portion will define how to encode and combine the mp3 files.
 
 **Example:**
+
 ```bash
 docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate=92k --audio-samplerate=22050 --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=6 --output-file="$string3" --logfile="$string5"
 ```
+
 **Options Explained:**
-* `-v /path/to/temp/mp3merge:/mnt` - MP3 Source folder
-* `-v /path/to/temp/untagged:/untagged` - M4B Destination folder
+* `-v /path/to/temp/mp3merge:/mnt` - MP3 Source folder (mapped to /mnt inside the docker)
+* `-v /path/to/temp/untagged:/untagged` - M4B Destination folder (mapped to /untagged inside the docker)
 * `-n` - No Interruptions
 * `-q` - Quiet
 * `--audio-bitrate=92k` - Bitrate
@@ -113,22 +117,22 @@ do
 	fi
 done
 ```
-* Change to the `/mp3merge` directory
+* Change to the `/mp3merge` directory  
 ```bash
 cd /path/to/temp/mp3merge
 ```
-* Create auto-m4b-tool script
+* Create auto-m4b-tool script  
 ```bash
 nano auto-m4b-tool.sh
 ```
-* Copy and paste the above code, and update lines 19, 20, 21, and 27 with your own paths everywhere you see `/path/to/`,
-  * Save `ctrl-s`
-  * Exit `ctrl-x`
+* Copy and paste the above code, and update lines 19, 20, 21, and 27 with your own paths everywhere you see `/path/to/`,  
+  * Save `ctrl-s`  
+  * Exit `ctrl-x`  
 ---
 #### Run the `auto-m4b-tool.sh` script
-* Change to the `/mp3merge` directory
+* Change to the `/mp3merge` directory  
 `cd /path/to/temp/mp3merge`
-* Run the script
+* Run the script  
 `./auto-m4b-tool.sh`
 
 This will run the script in a terminal window. To exit the script type `ctrl-c`. You can get fancy and run the script as a service, or set a cron job to start this script when the computer starts, but for my pursposes having an extra terminal window open with this running helps to see what's actually happening and keep tabs on the conversion.
@@ -170,7 +174,7 @@ Return to [Guide](https://github.com/seanap/Plex-Audiobook-Guide/blob/master/REA
 ### Notes:
 There are many ways to customize this workflow. I'd love to hear what you've come up with.
 
-Huge shout-out to `tylerdotdo` for sharing the original `auto-m4b-tool.sh` script!
+Huge shout-out to `sandreas` who created the amazing m4b-tool and to `tylerdotdo` for sharing the original `auto-m4b-tool.sh` script!
 
 ---
 <a href="https://www.buymeacoffee.com/seanap" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" alt="Buy Me A Book" height="41" width="174"></a>
