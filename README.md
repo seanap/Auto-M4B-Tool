@@ -1,19 +1,32 @@
 # M4B-Tool Automation
+### Table of Contents
+1. [Overview](#overview)
+  * [Computer Architecture](#computer-architecture)
+  * [Important folders](#important-folders)
+2. [Linux Install](https://github.com/seanap/Auto-M4B-Tool#linux-docker-server-vm)
+  1. [Install m4b-tool](https://github.com/seanap/Auto-M4B-Tool#install-m4b-tool-via-docker)
+  2. [Docker Run Command](https://github.com/seanap/Auto-M4B-Tool#understanding-the-docker-run-command)
+  3. [Create the auto-m4b-tool.sh script](https://github.com/seanap/Auto-M4B-Tool#create-the-auto-m4b-toolsh-script)
+  4. [Running the auto-m4b-tool.sh script](https://github.com/seanap/Auto-M4B-Tool#run-the-auto-m4b-toolsh-script)
+3. [Windows Install](https://github.com/seanap/Auto-M4B-Tool#windows-htpc-install)
+4. [Tagging](#tagging)
+5. [Notes](#notes)
 ---
 
 ## Overview:
 A method to watch a directory for newly added audiobooks, which triggers a script that converts the contents of that new folder into an m4b, and saves it to mp3tag's default directory ready for post processing.
 
-I use multiple OSes for this particular automation. As such, this particular method may be impractical to some, but there's nothing special about these steps that requires multiple computers, and everything could be done solely on windows. 
+I use multiple OSes for this particular automation. As such, this particular method may be impractical to some, but there's nothing special about these steps that requires multiple computers, and everything could be done solely on windows.
 > Please consider contributing a Windows Only method if you write a similar windows script.
 
-#### My computer architecture
- 
+#### Computer Architecture
+This is how my system is set up. I have a fileserver/nas that uses SMB to share my folders with all my computers.
+
 | Computer | OS | Noteable Installs |
 |--|--|--|
 | Fileserver VM | OMV (debian linux) | SMB network share, MergerFS+SnapRAID |
-| Docker Server VM | Ubuntu 20.04 | M4b-tool docker and automation script |
-| HTPC | Windows | mp3tag, dropit |
+| Docker Server VM | Ubuntu 20.04 | M4b-tool docker and `auto-m4b-tool.sh` script |
+| HTPC | Windows | Mp3tag, Dropit |
 
 #### Important folders:
 * `/original` - Folder where I keep my untagged/unmodified original copies
@@ -23,8 +36,8 @@ I use multiple OSes for this particular automation. As such, this particular met
 * `/audiobooks` - Folder where I keep properly tagged and organized audiobooks. This is what Plex/Booksonic looks at.
 
 #### Automated workflow:
-1. Newly aquired audiobooks are put in `/original`
-2. Auto Copy book to appropriate folder based on filetype
+1. Newly acquired audiobooks are put in `/original`
+2. Auto Copy new books to appropriate folder based on filetype
   * If book is already an m4b, then copy to `/untagged/Book1.m4b`
   * If book is mp3, then copy to `/mp3merge/Book1/*.mp3`
 3. Every 5 min the `auto-m4b-tool.sh` script checks `/mp3merge` for new folders, when found creates a single chapterized M4b
@@ -60,7 +73,7 @@ docker run -it --rm -u $(id -u):$(id -g) -v "$(pwd)":/mnt m4b-tool --version
 > For other methods of installing m4b-tool see https://github.com/sandreas/m4b-tool#installation
 ---
 #### Understanding the docker run command
-The docker run command is the heart of this operation.  There are two sets of variable we need to define that correspond to the Docker portion and the m4b-tool portion of this command.  The docker portion requires us to set the paths (volumes) that we will be working with.  The m4b-tool portion will define how to encode and combine the mp3 files.
+The docker run command is the heart of this operation.  There are two sets of variables we need to define that correspond to a Docker portion and a m4b-tool portion of this command.  The docker portion requires us to set the paths (-v volumes) that we will be working with.  The m4b-tool portion will define how to encode and combine the mp3 files.
 
 **Example:**
 
@@ -139,7 +152,7 @@ This will run the script in a terminal window. To exit the script type `ctrl-c`.
 
 ---
 
-## Windows (HTPC) Install Portion
+## Windows (HTPC) Install
 So far we have a script that watches a directory for new folders, converts the contents of that new folder into an m4b, and saves it to mp3tag's default directory ready for post processing.
 
 The Windows portion of this process uses a program called Dropit to monitor your `/original` folder for recent additions and will copy mp3 book
@@ -168,7 +181,7 @@ Dropit is a very configurable, lightweight, windows utility, that will help us m
 ![Options](https://i.imgur.com/VUOPcqo.png)
 ---
 ### Tagging
-Return to [Guide](https://github.com/seanap/Plex-Audiobook-Guide/blob/master/README.md#configure-mp3tag) to configure Mp3tag. 
+Return to [Guide](https://github.com/seanap/Plex-Audiobook-Guide/blob/master/README.md#configure-mp3tag) to configure Mp3tag.
 
 ---
 ### Notes:
