@@ -38,16 +38,16 @@ This is how my system is set up. I have a fileserver/nas that uses SMB to share 
 * `/audiobooks` - Folder where I keep properly tagged and organized audiobooks. This is what Plex/Booksonic looks at.
 
 #### Automated workflow:
-1. Newly acquired audiobooks are put in `/original`
-2. Auto Copy new books to appropriate folder based on filetype
-  * If book is already an m4b, then copy to `/untagged/Book1.m4b`
-  * If book is mp3, then copy to `/mp3merge/Book1/*.mp3`
-3. Every 5 min the `auto-m4b-tool.sh` script checks `/mp3merge` for new folders, when found creates a single chapterized M4b
-4. This newly created m4b file is saved to `/untagged`
-5. `/mp3merge/Book1` folder is moved to `/delete` and the contents of `/delete` is deleted
-6. Open mp3tag, all books that need processing will be loaded
-7. Use mp3tag audible websource script to tag
-8. Use mp3tag action script to rename/relocate to `/audiobooks`
+1. Newly acquired audiobooks are put in `/original`  
+2. Auto Copy new books to appropriate folder based on filetype  
+    * If book is already an m4b, then copy to `/untagged/Book1.m4b`  
+    * If book is mp3, then copy to `/mp3merge/Book1/*.mp3`  
+3. Every 5 min the `auto-m4b-tool.sh` script checks `/mp3merge` for new folders, when found creates a single chapterized M4b  
+4. This newly created m4b file is saved to `/untagged`  
+5. `/mp3merge/Book1` folder is moved to `/delete` and the contents of `/delete` is deleted  
+6. Open mp3tag, all books that need processing will be loaded  
+7. Use mp3tag audible websource script to tag  
+8. Use mp3tag action script to rename/relocate to `/audiobooks`  
 
 ---
 ## Install
