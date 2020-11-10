@@ -11,7 +11,8 @@
     4. [Running the auto-m4b-tool.sh script](https://github.com/seanap/Auto-M4B-Tool#run-the-auto-m4b-toolsh-script)  
 3. [Windows Install](https://github.com/seanap/Auto-M4B-Tool#windows-htpc-install)  
 4. [Tagging](#tagging)  
-5. [Notes](#notes)  
+5. [Improvements](#improvements)
+6. [Notes](#notes)  
 
 ---
 
@@ -183,7 +184,7 @@ Dropit is a very configurable, lightweight, windows utility, that will help us m
 ![Options](https://i.imgur.com/VUOPcqo.png)
 ---
 ### Tagging
-Return to [Guide](https://github.com/seanap/Plex-Audiobook-Guide/blob/master/README.md#configure-mp3tag) to configure Mp3tag.
+Return to [Guide](https://github.com/seanap/Plex-Audiobook-Guide/blob/master/README.md#configure-mp3tag) to configure Mp3tag. Make sure to set `/temp/untagged` as mp3tag's default folder.
 
 ---
 ### Improvements
