@@ -186,10 +186,17 @@ Dropit is a very configurable, lightweight, windows utility, that will help us m
 Return to [Guide](https://github.com/seanap/Plex-Audiobook-Guide/blob/master/README.md#configure-mp3tag) to configure Mp3tag.
 
 ---
+### Improvements
+* This is only for newly aquired books, and does not address any mp3 books already tagged and organized in `/audiobooks`.  
+* This uses the original filenames as Chapter names, and the original mp3 files as chapters.  Depending on your source material his may not be ideal but it works well enough.
+* This standardizes the mp3>AAC encoding to 92k at 22050Hz, regadless of source.  This is more than adaquit for audiobooks, however if your source is only 64k this will make the m4b larger than the mp3 while not actually improving the quality. Conversely if your audiobook source is 128k this will make the file smaller (good) and reduce quality (bad).  It's never ideal to do a lossy > lossy conversion. I have not noticed any quality degredation, but an audiophile may.  Would be nice if we could sample the book and dynamically set the bitrate based on the source material.  
+* Would be nice if the chapter.txt file that is generated could automatically end up in the `/audiobooks/author/book/` folder.
+* Let me know what else could make this better, and consider contributing! Thank you!
+---
 ### Notes:
 There are many ways to customize this workflow. I'd love to hear what you've come up with.
 
-Huge shout-out to `sandreas` who created the amazing m4b-tool and to `tylerdotdo` for sharing the original `auto-m4b-tool.sh` script!
+Huge shout-out to [sandreas](https://github.com/sandreas/m4b-tool) who created the amazing m4b-tool and to `tylerdotdo` for sharing the original `auto-m4b-tool.sh` script!
 
 ---
 <a href="https://www.buymeacoffee.com/seanap" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" alt="Buy Me A Book" height="41" width="174"></a>
