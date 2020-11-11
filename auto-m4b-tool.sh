@@ -20,7 +20,7 @@ do
 		echo Bitrate = $bit
 		echo The folder "$file" will be merged to  "$string3"
 		echo Starting Conversion
-		docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate="$bit" --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=6 --output-file="$string3" --logfile="$string5"
+		docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate="$bit" --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=4 --output-file="$string3" --logfile="$string5"
 		mv /path/to/temp/mp3merge/"$file" /path/to/temp/delete/
 		mv /path/to/temp/untagged/"$file".chapters.txt /path/to/temp/untagged/chapters
 		echo Finished Converting
