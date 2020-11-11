@@ -83,7 +83,9 @@ The docker run command is the heart of this operation.  There are two sets of va
 **Example:**
 
 ```bash
-docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate=92k --audio-samplerate=22050 --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=6 --output-file="$string3" --logfile="$string5"
+
+docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate="$bit" --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=6 --output-file="$string3" --logfile="$string5"
+
 ```
 
 **Options Explained:**
@@ -91,12 +93,11 @@ docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path
 * `-v /path/to/temp/untagged:/untagged` - M4B Destination folder (mapped to /untagged inside the docker)
 * `-n` - No Interruptions
 * `-q` - Quiet
-* `--audio-bitrate=92k` - Bitrate
-* `--audio-samplerate=22050` - Samplerate
+* `--audio-bitrate="$bit"` - Bitrate used is based on the bitrate of the mp3 file
 * `--skip-cover` - We will add a cover in mp3tag, no need to add it here it will be written over.
 * `--use-filenames-as-chapters` - Depends on your source material, If your mp3 has chapter names (TITLE) tagged to your liking then do not use
 * `--audio-codec=libfdk_aac` - High quality codec
-* `--jobs=6` - How many CPU Cores to use, do not set higher than available
+* `--jobs=4` - How many CPU Cores to use, do not set higher than available
 * More m4b-tool options https://github.com/sandreas/m4b-tool#reference
 
 > All you need to do is update the two `-v` paths to your own
@@ -127,7 +128,7 @@ do
 		echo Bitrate = $bit
 		echo The folder "$file" will be merged to  "$string3"
 		echo Starting Conversion
-		docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate="$bit" --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=6 --output-file="$string3" --logfile="$string5"
+		docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate="$bit" --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=4 --output-file="$string3" --logfile="$string5"
 		mv /path/to/temp/mp3merge/"$file" /path/to/temp/delete/
 		mv /path/to/temp/untagged/"$file".chapters.txt /path/to/temp/untagged/chapters
 		echo Finished Converting
