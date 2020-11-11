@@ -103,7 +103,7 @@ docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path
 
 ---
 #### Create the `auto-m4b-tool.sh` script
-This is a Linux Bash script.  You will need to update lines 19, 20, 21, and 27 of the script to your specific directories.
+This is a Linux Bash script.  You will need to update lines 23, 24, 25, and 31 of the script to your specific directories everywhere you see `/path/to/...`.
 ```Bash
 #!/bin/bash
 # set n to 1
