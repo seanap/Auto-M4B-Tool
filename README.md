@@ -165,9 +165,9 @@ This will run the script in a terminal window. To exit the script type `ctrl-c`.
 ---
 
 ## Windows (HTPC) Install
-So far we have a script that watches a directory for new folders, converts the contents of that new folder into an m4b, and saves it to mp3tag's default directory ready for post processing.
+So far we have a script that watches a directory (`/mp3merge`) for new folders, converts the contents of that new folder into an m4b, and saves it to mp3tag's default directory (`/untagged`) ready for post processing.
 
-The Windows portion of this process uses a program called Dropit to monitor your `/original` folder for recent additions and will copy mp3 book
+Now we need to configure the Windows portion of this process to monitor your `/original` folder for recent additions and copy mp3 book folders to `/mp3merge`. I use a program called Dropit to handle this.
 
 ### Install Dropit
 Dropit is a very configurable, lightweight, windows utility, that will help us monitor `/original` for changes and copy the files and folders to the right locations.
