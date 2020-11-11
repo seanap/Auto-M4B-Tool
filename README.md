@@ -56,9 +56,12 @@ First let's prepare the Linux machine (Docker Server VM) .  We will be installin
 ### Linux (Docker Server VM):
 
 #### Install m4b-tool via docker
-Docker is by far the easiest way to install and use m4b-tool.  Other methods will not be covered in this guide.
+Docker is by far the easiest way to install and use m4b-tool.  Other methods will not be covered in this guide. Run the following 5 commands.
 
 ```bash
+# Install FFMPEG
+sudo apt install ffmpeg -y
+
 # clone m4b-tool repository
 git clone https://github.com/sandreas/m4b-tool.git
 
@@ -70,7 +73,6 @@ docker build . -t m4b-tool
 
 # testing the command
 docker run -it --rm -u $(id -u):$(id -g) -v "$(pwd)":/mnt m4b-tool --version
-
 ```
 
 > For other methods of installing m4b-tool see https://github.com/sandreas/m4b-tool#installation
@@ -111,24 +113,30 @@ while [ $n -ge 0 ]
 do
 	if    ls -d */ 2> /dev/null
 	then
-		echo Starting Conversion
+		echo Folder Detected
 		string1="/untagged/"
 		string2=".m4b"
 		string4=".log"
 		for file in *; do
-    		if [ -d "$file" ]; then
+			if [ -d "$file" ]; then
+		mpthree=$(find . -maxdepth 2 -type f -name "*.mp3" | head -n 1)
 		string3=$string1$file$string2
 		string5=$string1$file$string4
-		echo "$file" will be merged into  "$string3"
-		docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate=92k --audio-samplerate=22050 --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=6 --output-file="$string3" --logfile="$string5"
-        mv /path/to/temp/mp3merge/"$file" /path/to/temp/delete/
+		echo Sampling $mpthree
+		bit=$(ffprobe -hide_banner -loglevel 0 -of flat -i "$mpthree" -select_streams a -show_entries format=bit_rate -of default=noprint_wrappers=1:nokey=1)
+		echo Bitrate = $bit
+		echo The folder "$file" will be merged to  "$string3"
+		echo Starting Conversion
+		docker run -it --rm -u $(id -u):$(id -g) -v /path/to/temp/mp3merge:/mnt -v /path/to/temp/untagged:/untagged m4b-tool merge "$file" -n -q --audio-bitrate="$bit" --skip-cover --use-filenames-as-chapters --audio-codec=libfdk_aac --jobs=6 --output-file="$string3" --logfile="$string5"
+		mv /path/to/temp/mp3merge/"$file" /path/to/temp/delete/
 		mv /path/to/temp/untagged/"$file".chapters.txt /path/to/temp/untagged/chapters
 		echo Finished Converting
+		echo Deleting duplicate mp3 audiobook folder
 		fi
 		done
 	else
-		echo No Folders Found. 5min to next run...
 		rm -r /path/to/temp/delete/* 2> /dev/null
+		echo No folders detected, next run 5min...
 		sleep 5m
 	fi
 done
@@ -141,7 +149,7 @@ cd /path/to/temp/mp3merge
 ```bash
 nano auto-m4b-tool.sh
 ```
-* Copy and paste the above code, and update lines 19, 20, 21, and 27 with your own paths everywhere you see `/path/to/`,  
+* Copy and paste the above code, and update lines 23, 24, 25, and 31 with your own paths everywhere you see `/path/to/...`,  
   * Save `ctrl-s`  
   * Exit `ctrl-x`  
 ---
