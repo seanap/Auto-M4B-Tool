@@ -195,6 +195,10 @@ Dropit is a very configurable, lightweight, windows utility, that will help us m
 ### Tagging
 Return to [Guide](https://github.com/seanap/Plex-Audiobook-Guide/blob/master/README.md#configure-mp3tag) to configure Mp3tag. Make sure to set `/temp/untagged` as mp3tag's default folder.
 
+MP3TAG: To verify what chapter titles were set, and if the chapter order is correct, Open Mp3tag, go to `Tools` > `Options` > `Advanced` > CHECK "List chapters as separate files".  You can close mp3tag, then reopen, and you should see all of the chapters as if they were separate files.
+
+**WARNING**: If you are using the option of seeing all chapters as files, saving the tags to file will take a very long time.  Once you verified that every thing looks good, best to switch back to only seeing the m4b as a single file (UNCHECK, close, and reopen).
+
 ---
 ### Improvements
 * This is only for newly aquired books, and does not address any mp3 books already tagged and organized in `/audiobooks`.  
