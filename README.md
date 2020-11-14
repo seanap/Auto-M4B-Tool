@@ -204,6 +204,7 @@ MP3TAG: To verify what chapter titles were set, and if the chapter order is corr
 * This is only for newly aquired books, and does not address any mp3 books already tagged and organized in `/audiobooks`.  
 * This uses the original filenames as Chapter names, and the original mp3 files as chapters.  Depending on your source material his may not be ideal but it works well enough.
 * Would be nice if the chapter.txt file that is generated could automatically end up in the `/audiobooks/author/book/` folder.
+* Would be nice for the script to compare the total length of the source mp3 files vs m4b, send an error message with the time difference.
 * Let me know what else could make this better, and consider contributing! Thank you!
 ---
 ### Notes:
