@@ -47,8 +47,8 @@ This is how my system is set up. I have a fileserver/nas that uses SMB to share 
 4. This newly created m4b file is saved to `/untagged`  
 5. `/mp3merge/Book1` folder is moved to `/delete` and the contents of `/delete` is deleted  
 6. Open mp3tag, all books that need processing will be loaded  
-7. Use mp3tag audible websource script to tag  
-8. Use mp3tag action script to rename/relocate to `/audiobooks`  
+7. Use mp3tag audible websource script to tag Keyboard Shortcut = `Ctrl+shift+i`  
+8. Use mp3tag action script to rename/relocate to `/audiobooks`  Keyboard Shortcut = `Alt+a 1`  
 
 ---
 ## Install
