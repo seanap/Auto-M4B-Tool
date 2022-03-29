@@ -12,7 +12,7 @@ do
 		string4=".log"
 		for file in *; do
 			if [ -d "$file" ]; then
-		mpthree=$(find . -maxdepth 2 -type f -name "*.mp3" | head -n 1)
+		mpthree=$(find "$file" -maxdepth 2 -type f -name "*.mp3" | head -n 1)
 		string3=$string1$file$string2
 		string5=$string1$file$string4
 		echo Sampling $mpthree
