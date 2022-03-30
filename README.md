@@ -1,3 +1,7 @@
+# :warning: DEPRECIATED. USE [auto-m4b](https://github.com/seanap/auto-m4b) DOCKER
+### This has been packaged into an easy to use docker. Consider all information below outdated.
+
+
 # M4B-Tool Automation
 ### Table of Contents
 
